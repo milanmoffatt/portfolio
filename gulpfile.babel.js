@@ -4,6 +4,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
+import config from 'config.json';
 let awspublish = require('gulp-awspublish');
 
 
@@ -175,8 +176,8 @@ gulp.task('deploy', ['build'], () => {
     params: {
       Bucket: 'milanmoffatt.com'
     },
-    accessKeyId: 'AKIAI57CTXBF5RRMB6XA',
-    secretAccessKey: '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'
+    accessKeyId: config.s3accessKeyId,
+    secretAccessKey: config.s3secretAccessKey
   });
   return gulp.src('dist/**/*')
     .pipe(publisher.publish())
